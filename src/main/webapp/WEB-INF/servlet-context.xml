@@ -18,11 +18,13 @@
     <!-- MVC 어노테이션 스캔   -->
     <context:component-scan base-package="org.zerock.springex.controller" />
 
-    <!-- 문자열 날짜 변환 포매터 추가   -->
+    <!-- 문자열 날짜 변환 포매터 추가, 체크박스 on 을 true 또는 false 변화하는 포매터 추가   -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatters">
             <set>
                 <bean class="org.zerock.springex.controller.formatter.LocalDateFormatter"/>
+                <bean class="org.zerock.springex.controller.formatter.CheckboxFormatter"/>
+
             </set>
         </property>
     </bean>
