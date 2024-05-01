@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+                 <!-- 매퍼 인터페이스 위치 -->
+<mapper namespace="org.zerock.springex.mapper.TimeMapper2">
+    <!-- 추상메소드 이름과 id와 같음, 결과타입 String -->
+    <select id="getNow" resultType="string">
+        select now()
+    </select>
+
+</mapper>

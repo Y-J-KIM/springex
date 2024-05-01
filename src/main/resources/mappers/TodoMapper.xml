@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 매퍼 인터페이스 위치 -->
+<mapper namespace="org.zerock.springex.mapper.TodoMapper">
+
+    <!-- 추상메소드 이름과 id와 같음, 결과타입 String -->
+    <select id="getTime" resultType="string">
+        select now()
+    </select>
+
+    <insert id="insert">
+        insert into tbl_todo(title, dueDate, writer)
+        values (#{title},#{dueDate},#{writer})
+    </insert>
+
+    <select id="selectAll" resultType="org.zerock.springex.domain.TodoVO">
+        select * from tbl_todo order by tno desc
+    </select>
+
+</mapper>
