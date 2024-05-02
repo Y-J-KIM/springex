@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: it
-  Date: 24. 5. 1.
-  Time: 오전 11:36
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -97,15 +91,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${dtoList}" var="dto">
+                            <c:forEach items="${responseDTO.dtoList}" var="dto">
                                 <tr>
                                     <th scope="row"><c:out value="${dto.tno}"/></th>
-                                    <td><a href="/todo/read?tno=${dto.tno}" class="text-decoration-none"><c:out value="${dto.title}"/></a></td>
+                                    <td>
+                                        <a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}" class="text-decoration-none" data-tno="${dto.tno}" >
+                                            <c:out value="${dto.title}"/>
+                                        </a>
+                                    </td>
                                     <td><c:out value="${dto.writer}"/></td>
                                     <td><c:out value="${dto.dueDate}"/></td>
                                     <td><c:out value="${dto.finished}"/></td>
                                 </tr>
                             </c:forEach>
+
 
                             </tbody>
                         </table>
@@ -114,20 +113,21 @@
 
                         <div class="float-end">
                             <ul class="pagination flex-wrap">
-                                <c:if test="${responseDTO.prev}">
+                                <%--  이전 버튼  --%>
+                                    <c:if test="${responseDTO.prev}">
                                     <li class="page-item">
-                                        <a class="page-link" data-num="${responseDTO.start -1}">Previous</a>
+                                        <a class="page-link" data-num="${responseDTO.start -1}">이전</a>
                                     </li>
                                 </c:if>
-
+                                <%-- 가운데 페이지 숫자 --%>
                                 <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
                                     <li class="page-item ${responseDTO.page == num? "active":""} ">
                                         <a class="page-link"  data-num="${num}">${num}</a></li>
                                 </c:forEach>
-
+                                <%-- 다음 버튼 --%>
                                 <c:if test="${responseDTO.next}">
                                     <li class="page-item">
-                                        <a class="page-link"  data-num="${responseDTO.end + 1}">Next</a>
+                                        <a class="page-link"  data-num="${responseDTO.end + 1}">다음</a>
                                     </li>
                                 </c:if>
                             </ul>
@@ -136,7 +136,7 @@
 
                         <script>
 
-                            /* document.querySelector(".pagination").addEventListener("click", function (e) {
+                            document.querySelector(".pagination").addEventListener("click", function (e) {
                                     e.preventDefault()
                                     e.stopPropagation()
 
@@ -149,36 +149,36 @@
                                     const num = target.getAttribute("data-num")
 
                                     self.location = `/todo/list?page=\${num}` //백틱(` `)을 이용해서 템플릿 처리
-                                },false)*/
+                                },false)
 
-                            document.querySelector(".pagination").addEventListener("click", function (e) {
-                                e.preventDefault()
-                                e.stopPropagation()
-
-                                const target = e.target
-
-                                if(target.tagName !== 'A') {
-                                    return
-                                }
-                                const num = target.getAttribute("data-num")
-
-                                const formObj = document.querySelector("form")
-
-                                formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
-
-                                formObj.submit();
-
-                            },false)
-
-
-
-                            document.querySelector(".clearBtn").addEventListener("click", function (e){
-                                e.preventDefault()
-                                e.stopPropagation()
-
-                                self.location ='/todo/list'
-
-                            },false)
+                            // document.querySelector(".pagination").addEventListener("click", function (e) {
+                            //     e.preventDefault()
+                            //     e.stopPropagation()
+                            //
+                            //     const target = e.target
+                            //
+                            //     if(target.tagName !== 'A') {
+                            //         return
+                            //     }
+                            //     const num = target.getAttribute("data-num")
+                            //
+                            //     const formObj = document.querySelector("form")
+                            //
+                            //     formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
+                            //
+                            //     formObj.submit();
+                            //
+                            // },false)
+                            //
+                            //
+                            //
+                            // document.querySelector(".clearBtn").addEventListener("click", function (e){
+                            //     e.preventDefault()
+                            //     e.stopPropagation()
+                            //
+                            //     self.location ='/todo/list'
+                            //
+                            // },false)
 
 
                         </script>
