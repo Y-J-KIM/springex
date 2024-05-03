@@ -85,12 +85,13 @@ public class PageRequestDTO {
         return builder.toString();
     }
 
-
+    //type 배열에서 매치되는 문자열이 있는지 확인
     public boolean checkType(String type){
-
+        // 검색조건 types 가 없으면 false 로 리턴
         if(types == null || types.length == 0){
             return false;
         }
+        //types 에서 입력 type 과 같은 문자열이 있는지 확인해서 있으면 true 리턴
         return Arrays.stream(types).anyMatch(type::equals);
     }
 

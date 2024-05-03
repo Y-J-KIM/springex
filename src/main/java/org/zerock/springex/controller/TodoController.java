@@ -67,10 +67,7 @@ public class TodoController {
 
         todoService.remove(tno); //삭제
 
-        redirectAttributes.addAttribute("page",1);
-        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
-
-        return "redirect:/todo/list";
+        return "redirect:/todo/list" + pageRequestDTO.getLink();
     }
 
     @PostMapping("/modify")
@@ -87,9 +84,9 @@ public class TodoController {
         log.info("todoDTO: " + todoDTO);
         todoService.modify(todoDTO);    //수정하기
 
-        redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
-        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
-        return "redirect:/todo/list";
+        redirectAttributes.addAttribute("tno",todoDTO.getTno());
+
+        return "redirect:/todo/read";
     }
 
     @GetMapping("/list")
